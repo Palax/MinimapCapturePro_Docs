@@ -33,4 +33,9 @@ Once you click these the tool will show you its default ui with no layers on it.
 ![EmptyTools](https://github.com/user-attachments/assets/d3566d84-98d6-408e-b297-37de0daad9cf)
 
 ## Explaining the Minimap Capture Pro tool
-First of all this panel purpose is to stack layers that compose your final cartographic texture map, and its default state its empty.
+First of all this panel purpose is to stack layers that compose your final cartographic texture map. What you see above is the empty state of the tool.  
+- "**Select layer class**" in order to add a layer on this tool you must pick your layer type, once you select that layer type the...  
+- "**Click to add Layer**" becomes green and you can click anywhere on this button to add this type of layer into the layer stack  
+- "**Resolution**" will specify what size your final texture will be, at this moment only square textures are supported in range of 128 x 128 to 8192 x 8192  
+- "**Texture**" and the subsequent elements represents what is the path to where this final texture will be generated  
+Start by clicking Path and then in the second black box specify the texture name  
