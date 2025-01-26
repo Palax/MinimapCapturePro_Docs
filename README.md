@@ -65,4 +65,17 @@ At this moment in the plugin version 1.0, the lighting is captured into the text
 - "**Always Persist Rendering State**" Whether to persist the rendering state even if bCaptureEveryFrame==false.  This allows velocities for Motion Blur and Temporal AA to be computed. Default is true
 - "**Use Ray Tracing if Enabled**" as its name implies will render with this feature on in drawing the Final Color in RGB
 - "**Transparent Background**" Whether to make the part of the texture that shows no scene captured pixels as transparent  Default = true; This could be used for composition; On false will make the texture to show black background
+- "**Hide Sky**" If this is set to true the sky will no longer be captured into the final texture, this is mostly expected to be true as the sky breaks the transparent background detection
+- "**Sky Name**" you can use this name to specify the possible names of the sky sphere that must be hidden during the capture process, use this name in case your sky has a different name
+- "**Sky Tag**" in case the above parameter fails in detecting the sky you can add a tag on the sky sphere in order for this plugin to hide it during the capture process
+- "**Hide All Sky Atmosphere**" atmospheres are not intended to be captured so all of these component types into your map will be hidden during capture
+- "**Hide All Sky Lights**" these will be hidden during capture as they might not render correctly
+- "**Capture Just Landscapes**" can be used to only render the landscape, nothing else will be captured
+At the end of capturing this layer it will export a [Main] texture and a [MainMask] texture that can be pluged in into the other layers. 
+## HeightGradients
+
+![HeightGradientsWithTex](https://github.com/user-attachments/assets/730c5e57-ef46-407d-ba93-765e9d246c2d)  
+With this layer you can capture your level map based on the heights and draw them into colored or black and white gradients. For example if your intended cartographic design is to draw the height based terrain maps, you could put blue at the lowest height to represent water, then yellow at the mid to represent typical ground then followed by green to signal vegetation ending with brown at the top to signal mountains. This layer is perfect for this purpose. It supports up to 8 gradient ramps, each ramp having a low and a high color and its drawn within a specific height range.
+In the image above you can see that a black and white colors are used to cover the entire drawing range of heights and it ends up drawng a typical  black and white height map.
+This layer also supports drawing colored outlines on these gradient ramps for a more stylized look.
 
