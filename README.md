@@ -51,4 +51,18 @@ and one or more masks with its drawings / captures that can be fed up to the lay
 As you see in the image below texture is the left texture and mask is the right texture and nothing else than a name for a alpha map.
 ![TextureMaskExample](https://github.com/user-attachments/assets/cec7387e-0c38-41ed-8c99-10aa925406e0)  
 Every layer will dump at least a [Main] texture and a [MainMask] which represents the alpha channel of the main texture. A mask basically specifies where in the resulted texture the layer has drawn into it. With white areas acting as the pixels drawn and the black areas as not.
+Each layer will also contain their type, their layer name followed by a small gray button with bin icon that can enable deleting this layer from the layer stack.
+
+# Detailed information about layer types
+## DirectRender
+![DirectRenderWithTex](https://github.com/user-attachments/assets/c3a919a6-3834-492d-9163-7035e2b9c3af)  
+As the name implies, this layer will capture your level map into the texture on how it looks in your viewport with the default materials and textures on your landscape and meshes.
+It is probably a typical starter on your layer stack as you can use it to feed this render into your other layer to achieve more interesting maps.
+At this moment in the plugin version 1.0, the lighting is captured into the texture as it is in your viewport.
+- "**Max View Distance Override**" if > 0, sets a maximum render distance override.  Can be used to cull distant objects from a reflection if the reflecting plane is in an enclosed area like a hallway or room, Default value is -1
+- "**Capture Source**" dictates the render type, with Final Color and Base Color being the most useful as it renders with materials and lighting or materials only  
+![DirectRenderComp](https://github.com/user-attachments/assets/3450e668-9a6c-4f31-be87-a7fa0a14bc28)
+- "**Always Persist Rendering State**" Whether to persist the rendering state even if bCaptureEveryFrame==false.  This allows velocities for Motion Blur and Temporal AA to be computed. Default is true
+- "**Use Ray Tracing if Enabled**" as its name implies will render with this feature on in drawing the Final Color in RGB
+- "**Transparent Background**" Whether to make the part of the texture that shows no scene captured pixels as transparent  Default = true; This could be used for composition; On false will make the texture to show black background
 
