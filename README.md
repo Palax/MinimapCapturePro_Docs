@@ -106,3 +106,6 @@ Is a useful type of layer that can give you the ability to enhance accesible are
 - "**Draw Only Largest Patch**" this parameter when true it will be used to draw only the largest navigation patch (meaning all meshes that share common edges or nav links) by area on the map.
 This is useful in case you want to render parts of your map that are not reachable by the player. As you see in the image above when this is on, small patches of unconnected patches are not drawn.
 Note that if this is false it will show you another parameter called "**Min Area Patch Limit**" that gives you control to not draw patches with area smaller than this value.
+
+## DrawText  
+![DrawTextsLayer](https://github.com/user-attachments/assets/3ad631d6-cad1-43fb-b056-8a7ca9d33c0d)  
