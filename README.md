@@ -109,3 +109,18 @@ Note that if this is false it will show you another parameter called "**Min Area
 
 ## DrawText  
 ![DrawTextsLayer](https://github.com/user-attachments/assets/3ad631d6-cad1-43fb-b056-8a7ca9d33c0d)  
+As its name implies, this layer is intended to be used to draw text at specific locations within the texture. Note that the DirectRender layer in the image is used as input for our text layer in the parameter named "**Base**".
+This is the first example of this type of layer that has input another texture from a different layer. What you will notice is that the text is also drawn in the viewport, and not only that, you can use your mouse to change the text position by using drag-clicking, the text that can be moved will flicker white to its color when your mouse is near the text.
+- "**Base**" So, everytime you use this layer make sure to have some other layer on top that generates a texture to be used as input for the text to be drawn upon, then when you click the button will show you a list of all texture inputs that you can use.
+- "**Blend Type**" this is a very important parameter as the drawn text will be blended against the **Base** texture, the blending options are mostly typical blending options you find for example in photoshop and by default the Normal type will be used and text is shown in the texture exactly as you see it in the viewport.
+- "**Texts**" The main parameter of this layer is Texts, its a list that you can add texts one at a time that contains all the parameters needed to change the looks of this text instance, such as color and size and the rest
+- "**World Position**" one of the parameters of these texts is this position and is within the world of map, you can change the values and you will be able to see the text shifting location within the viewport and your rendered texture
+- "**Text**" here you can specify what is exactly the string name of the text displayed
+- "**Color**" this is an obvious parameter, the entire color of the text
+- "**Font**" the shape and looks of the text is represented by the font, make sure at this time to drag the font into this parameter and not select it from the drop down list as it fails to render properly
+- "**Shadow Color**" if the alpha is beyond zero into this color it will enable shadow rendering of this text, by default the alpha is 0 and therefore the shadow is not drawn
+- "**Shadow Offset**" dictates how the shadow is positioned from the text, this is only relevant if text shadows are enabled
+- "**Outlined**" represents the text outline with the color specified in...
+- "**Outline Color**" 
+- "**Horizontal Spacing Adjust**" represent the distance between text symbols
+- "**Scale**" enables scaling of the text, but beware that larger than 1 text makes the text render blurry, for proper sizing use the font
