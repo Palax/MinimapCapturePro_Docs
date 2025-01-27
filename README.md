@@ -41,7 +41,8 @@ First of all this panel purpose is to stack layers that compose your final carto
 Start by clicking Path and then in the second black box specify the texture name  
 - "**Capture**" this button will start processing each layer in <ins>top to bottom</ins> order and produce your map; If this button is dark grey and has red text color it means that
 there is a layer in the stack that has a prerequisite that is not met. For example, some layers might require an input such as a texture or a mask and you need to specify it in order for
-this button to work.
+this button to work. When you click this button you will notice under the button a blue bar will be displayed to showcase the progress of this process, during this time is recommended to not interfere with the
+editor and also do not minimize unreal as will minimize computational resources and therefore take forever to finish.
 
 ## How the layers work broadly
 ![LayerArea](https://github.com/user-attachments/assets/89b9b1f4-8ea0-489a-be3b-f2e276c71650)  
@@ -54,7 +55,7 @@ Every layer will dump at least a [Main] texture and a [MainMask] which represent
 Each layer will also contain their type, their layer name followed by a small gray button with bin icon that can enable deleting this layer from the layer stack.
 
 # Detailed information about layer types
-## DirectRender
+## Direct Render
 ![DirectRenderWithTex](https://github.com/user-attachments/assets/c3a919a6-3834-492d-9163-7035e2b9c3af)  
 As the name implies, this layer will capture your level map into the texture on how it looks in your viewport with the default materials and textures on your landscape and meshes.
 It is probably a typical starter on your layer stack as you can use it to feed this render into your other layer to achieve more interesting maps.
@@ -72,7 +73,7 @@ At this moment in the plugin version 1.0, the lighting is captured into the text
 - "**Hide All Sky Lights**" these will be hidden during capture as they might not render correctly
 - "**Capture Just Landscapes**" can be used to only render the landscape, nothing else will be captured
 At the end of capturing this layer it will export a [Main] texture and a [MainMask] texture that can be pluged in into the other layers. 
-## HeightGradients
+## Height Gradients
 
 ![HeightGradientsWithTex](https://github.com/user-attachments/assets/730c5e57-ef46-407d-ba93-765e9d246c2d)  
 With this layer you can capture your level map based on the heights and draw them into colored or black and white gradients. For example if your intended cartographic design is to draw the height based terrain maps, you could put blue at the lowest height to represent water, then yellow at the mid to represent typical ground then followed by green to signal vegetation ending with brown at the top to signal mountains. This layer is perfect for this purpose. It supports up to 8 gradient ramps, each ramp having a low and a high color and its drawn within a specific height range.
@@ -94,7 +95,7 @@ This layer also supports drawing colored outlines on these gradient ramps for a 
 ![HeightGradientOutlines](https://github.com/user-attachments/assets/4cba80c8-ffa9-46a5-b783-ef6396b5ddf7)  
 
 At the end of capturing this layer it will export a [Main] texture as you see above, a [MainMask] that contains all the drawn pixels of this layer and a list of [GradientMask_[1-8]] that only represent the drawn pixels for each of the gradient ramps added into **Gradients** list.
-## DrawNavigation
+## Draw Navigation
 ![NavDrawLayer](https://github.com/user-attachments/assets/10794a42-3b2e-4658-912f-cda19168f328)  
 
 Is a useful type of layer that can give you the ability to enhance accesible areas to the players in your map by drawing the navigation. This layer requires NavMeshBoundsVolumes into your level so that the Navigation system has a valid mesh built. If you see this layer as red, make sure to add at least one such NavMeshBoundsVolumes into your map, sometimes navigation requires an editor restart.
@@ -107,10 +108,11 @@ Is a useful type of layer that can give you the ability to enhance accesible are
 This is useful in case you want to render parts of your map that are not reachable by the player. As you see in the image above when this is on, small patches of unconnected patches are not drawn.
 Note that if this is false it will show you another parameter called "**Min Area Patch Limit**" that gives you control to not draw patches with area smaller than this value.
 
-## DrawText  
+## Draw Text  
 ![DrawTextsLayer](https://github.com/user-attachments/assets/3ad631d6-cad1-43fb-b056-8a7ca9d33c0d)  
-As its name implies, this layer is intended to be used to draw text at specific locations within the texture. Note that the DirectRender layer in the image is used as input for our text layer in the parameter named "**Base**".
-This is the first example of this type of layer that has input another texture from a different layer. What you will notice is that the text is also drawn in the viewport, and not only that, you can use your mouse to change the text position by using drag-clicking, the text that can be moved will flicker white to its color when your mouse is near the text.
+As its name implies, this layer is intended to be used to draw text at specific locations within the texture.Note that the DirectRender layer in the image is used as input for our text layer in the parameter named "**Base**".
+This is the first example of this type of layer that has input another texture from a different layer.    
+What you will notice is that the text is also drawn in the viewport, and not only that, you can use your mouse to change the text position by using drag-clicking, the text that can be moved will flicker white to its color when your mouse is near the text.
 - "**Base**" So, everytime you use this layer make sure to have some other layer on top that generates a texture to be used as input for the text to be drawn upon, then when you click the button will show you a list of all texture inputs that you can use.
 - "**Blend Type**" this is a very important parameter as the drawn text will be blended against the **Base** texture, the blending options are mostly typical blending options you find for example in photoshop and by default the Normal type will be used and text is shown in the texture exactly as you see it in the viewport.
 - "**Texts**" The main parameter of this layer is Texts, its a list that you can add texts one at a time that contains all the parameters needed to change the looks of this text instance, such as color and size and the rest
@@ -124,3 +126,22 @@ This is the first example of this type of layer that has input another texture f
 - "**Outline Color**" 
 - "**Horizontal Spacing Adjust**" represent the distance between text symbols
 - "**Scale**" enables scaling of the text, but beware that larger than 1 text makes the text render blurry, for proper sizing use the font
+## Mask Effects  
+![MaskEffects1](https://github.com/user-attachments/assets/dab091ff-f891-4b11-ba9d-a5f8b8a1a518)  
+
+You can think of this layer as something similar with Layer Syles in photoshop. The mask implies inputs to this layer are needed as a form of masks to dictate where these effects are drawn upon. The red outline of the layer visible in the image above is the fact that no option is picked for such effects yet and therefore nothing will be drawn even if capture button would be able to proceed.
+- "**Click to add output texture:**" and "**Click to remove out texture:**" are two states of the same button that specifies which texture is used as input for this layer, when the text is red it means you have to select a valid textures from the available texture outputs from the layers above this one, the "**Unselected**" button will give you a list of all those possible valid textures that can be selected, when you did that the text on the button will become green and you have to click it to commit this texture to this layer, after this second click the main input texture will be displayed in light blue (can also be seen in the image as "HeightGradients_973")
+- "**Click to add mask:**" and "**Click to remove commited mask:**" are text representing the states of the added masks to this layer, you can add multiple masks in this list by clicking the green text, and will activate a second line that can be specified
+After you have successfully commited output and the masks to this layer, you need to specify one of the 4 possible effect types by clicking one or all of the 4: "**Add Fill**", "**Add Outline**", "**Add Inner Glow**" and "**Add Outer Glow**" 
+![MaskEffectsFillColor](https://github.com/user-attachments/assets/8f8dae0c-5854-4171-9bb8-5d2e5ae1454a)
+
+As you may notice, the layer border is now displayed as grey which is a good thing as this layer can actually render something, and that something is visible in this image.
+- "**Add Fill Color**" will draw a uniform color to cover the entire masks applied over this layer, these masks are visible as the black and white texture in the mid of the above image.
+- "**Fill Color Distance**" when this value is 0 it means that all pixels within the mask will be drawn as this color, but a non zero value it means that any pixel that is within this distance from any margin of the mask it will not draw.
+
+  
+![OutlineThickness](https://github.com/user-attachments/assets/f202c1db-7043-4034-9f0d-d2839cb08774)  
+Once you click the "**Add Outline**", the Outlines parameters will be displayed on the panel, this feature is almost the same feature found in the Height Gradients layer but here it is more powerful as it can draw outlines from different incoming masks into this layer.
+- "**Outline Thickness**" is how thick the outlines are rendered in a range from 0 to 32 pixels wide, a value of 0 disables this feature
+- "**Outline Intersections**" is how these outlines are blended in case they are rendered one on top of the other
+- "**Outline Color**" the color of the outline
