@@ -55,7 +55,7 @@ Every layer will dump at least a [Main] texture and a [MainMask] which represent
 Each layer will also contain their type, their layer name followed by a small gray button with bin icon that can enable deleting this layer from the layer stack.
 
 # Detailed information about layer types
-## Direct Render
+## Layer Direct Render
 ![DirectRenderWithTex](https://github.com/user-attachments/assets/c3a919a6-3834-492d-9163-7035e2b9c3af)  
 As the name implies, this layer will capture your level map into the texture on how it looks in your viewport with the default materials and textures on your landscape and meshes.
 It is probably a typical starter on your layer stack as you can use it to feed this render into your other layer to achieve more interesting maps.
@@ -73,7 +73,7 @@ At this moment in the plugin version 1.0, the lighting is captured into the text
 - "**Hide All Sky Lights**" these will be hidden during capture as they might not render correctly
 - "**Capture Just Landscapes**" can be used to only render the landscape, nothing else will be captured
 At the end of capturing this layer it will export a [Main] texture and a [MainMask] texture that can be pluged in into the other layers. 
-## Height Gradients
+## Layer Height Gradients
 
 ![HeightGradientsWithTex](https://github.com/user-attachments/assets/730c5e57-ef46-407d-ba93-765e9d246c2d)  
 With this layer you can capture your level map based on the heights and draw them into colored or black and white gradients. For example if your intended cartographic design is to draw the height based terrain maps, you could put blue at the lowest height to represent water, then yellow at the mid to represent typical ground then followed by green to signal vegetation ending with brown at the top to signal mountains. This layer is perfect for this purpose. It supports up to 8 gradient ramps, each ramp having a low and a high color and its drawn within a specific height range.
@@ -95,7 +95,7 @@ This layer also supports drawing colored outlines on these gradient ramps for a 
 ![HeightGradientOutlines](https://github.com/user-attachments/assets/4cba80c8-ffa9-46a5-b783-ef6396b5ddf7)  
 
 At the end of capturing this layer it will export a [Main] texture as you see above, a [MainMask] that contains all the drawn pixels of this layer and a list of [GradientMask_[1-8]] that only represent the drawn pixels for each of the gradient ramps added into **Gradients** list.
-## Draw Navigation
+## Layer Draw Navigation
 ![NavDrawLayer](https://github.com/user-attachments/assets/10794a42-3b2e-4658-912f-cda19168f328)  
 
 Is a useful type of layer that can give you the ability to enhance accesible areas to the players in your map by drawing the navigation. This layer requires NavMeshBoundsVolumes into your level so that the Navigation system has a valid mesh built. If you see this layer as red, make sure to add at least one such NavMeshBoundsVolumes into your map, sometimes navigation requires an editor restart.
@@ -108,7 +108,7 @@ Is a useful type of layer that can give you the ability to enhance accesible are
 This is useful in case you want to render parts of your map that are not reachable by the player. As you see in the image above when this is on, small patches of unconnected patches are not drawn.
 Note that if this is false it will show you another parameter called "**Min Area Patch Limit**" that gives you control to not draw patches with area smaller than this value.
 
-## Draw Text  
+## Layer Draw Text
 ![DrawTextsLayer](https://github.com/user-attachments/assets/3ad631d6-cad1-43fb-b056-8a7ca9d33c0d)  
 As its name implies, this layer is intended to be used to draw text at specific locations within the texture.Note that the DirectRender layer in the image is used as input for our text layer in the parameter named "**Base**".
 This is the first example of this type of layer that has input another texture from a different layer.    
@@ -153,6 +153,30 @@ Inner Glow section is activated if you click on the "**Add Inner Glow**". This f
 - "**Inner Glow Margin Color**" represents the color that touches the margins of the masks
 - "**Inner Glow Inner Color**" represents the color on the inside of the mask
 - "**Inner Glow Blend**" represents how the this glow blends against the **Out texture** (texture that is always visible on top of this layer properties with blue text)
-- "**Inner Glow Thickness**" is a value between 1 and 64 and represents how wide is this glow, to have a value of zero you must unclik the **Add Inner Glow**, values larger than 64 pixels are not available at this time
+- "**Inner Glow Thickness**" is a value between 1 and 64 pixels and represents how wide is this glow, to have a value of zero you must unclik the **Add Inner Glow**, values larger than 64 pixels are not available at this time
 
 ![OuterGlowExamples](https://github.com/user-attachments/assets/64700ef4-4883-47cd-8613-caf49a2d87fb)
+Outer Glow section is activated if you click on the "**Add Outer Glow**". This feature as its name implies is a glow that is drawn on the outside of the masks.
+- "**Outer Glow Margin Color**" represents the color drawn on the outer part the margin of the masks
+- "**Outer Glow Inner Color**" represents the color that touches the margin of the masks
+- "**Outer Glow Blend**" represents how the glow blends with the **Out texture**
+- "**Outer Glow Thickness**" represents how wide is the glow in a range of 1 to 64 pixels from the masks margins
+
+## Layer Blend   
+![BlendLayer](https://github.com/user-attachments/assets/8da4336d-bc08-4304-89cd-fc33d999bd2f)  
+This type of layer is very simple in purpose, is to blend two texture outputs from layers above, as you can see in this image, there are two top layers, one that renders the scene as Base Color and one that renders a Height Map, and this blend layer blends the top texture against the bottom and finally outputs this into a new texture.
+- "**Base:**" is the parameter that specifies the bottom texture
+- "**Top:**" is the parameter that specifies the texture that is blended against the base
+- "**Blend:**" is the type of blend, and these options are: Normal, Add, Subtract, Multiply, Darken, Screen, Overlay, HardLight and SoftLight; Note that these do the same things as layer types you find Photoshop
+- "**Opacity:**" how much of this blend happens in percentage, a value of 0 does nothing
+
+### Captured Texture Meta Data
+This is a very important topic. Each texture exported by this plugin has a requirement on another plugin to keep some metadata.  Therefore make sure you have this plugin also at runtime into your game so you can read these values.
+![Datasmith](https://github.com/user-attachments/assets/5547e8c4-e357-4a52-8986-9f3895fc374c)  
+With this plugin activated you can parse each of these generated textures at runtime.  
+![Metadata](https://github.com/user-attachments/assets/ae80e095-ecd0-4af3-9550-e02554499f48)  
+As you can also see in this image, in the metadata you will find **Map** which represents which map this texture is related to. The **TextureCenterWorldPositionX** and **TextureCenterWorldPositionY** represents the world axis x and y coordinates of the center of this image, for the Z coordinate  you can assume its zero so its not written here.  
+**TextureWorldSizeX** and **TextureWorldSizeY** represents how much of the map units is captured in the texture, so if for example you hava a 2048x2048 texture representing a 10000 uu, it means each pixel in the texture is representing 10000/2048 ~= roughly 5 uu per pixel.  
+At this time, this plugin captures the texture aligned with the world axis, therefore the X axis of the texture is aligned with world X axis, also the same thing goes for the Y axis.
+With this information here you can draw this texture inside any minimap widget.
+To find out how to parse this metadata, use the unreal engine documentation [link](https://dev.epicgames.com/documentation/en-us/unreal-engine/using-datasmith-metadata-in-unreal-engine?application_version=5.4)
