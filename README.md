@@ -178,5 +178,5 @@ With this plugin activated you can parse each of these generated textures at run
 As you can also see in this image, in the metadata you will find **Map** which represents which map this texture is related to. The **TextureCenterWorldPositionX** and **TextureCenterWorldPositionY** represents the world axis x and y coordinates of the center of this image, for the Z coordinate  you can assume its zero so its not written here.  
 **TextureWorldSizeX** and **TextureWorldSizeY** represents how much of the map units is captured in the texture, so if for example you hava a 2048x2048 texture representing a 10000 uu, it means each pixel in the texture is representing 10000/2048 ~= roughly 5 uu per pixel.  
 At this time, this plugin captures the texture aligned with the world axis, therefore the X axis of the texture is aligned with world X axis, also the same thing goes for the Y axis.
-With this information here you can draw this texture inside any minimap widget.
+With this information here you can draw this texture inside any minimap widget.  
 To find out how to parse this metadata, use the unreal engine documentation [link](https://dev.epicgames.com/documentation/en-us/unreal-engine/using-datasmith-metadata-in-unreal-engine?application_version=5.4)
