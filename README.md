@@ -46,7 +46,7 @@ editor and also do not minimize unreal as will minimize computational resources 
 
 ## How the layers work broadly
 ![LayerArea](https://github.com/user-attachments/assets/89b9b1f4-8ea0-489a-be3b-f2e276c71650)  
-In this image you can see an example of layer square with rounded borders, these are visual hints on where such layers are displayed visually and which elements are part of which layer.  
+In this image you can see an example of layer UI square with rounded borders, these are visual hints on where such layers are displayed visually and which elements are part of which layer.  
 A layer in this tool acts as some sort of "designer" for your map that is tasked to do one type of thing depending on the layer type. Once this layer finishes executing it will create a texture
 and one or more masks with its drawings / captures that can be fed up to the layers below it. At the end of this stack of layers the final texture will typically contain all your drawings and the other textures and masks will be dumped. A layer has its own visual space that is a square with rounded borders and can be seen in the image above.
 As you see in the image below texture is the left texture and mask is the right texture and nothing else than a name for a alpha map.
@@ -139,9 +139,20 @@ As you may notice, the layer border is now displayed as grey which is a good thi
 - "**Add Fill Color**" will draw a uniform color to cover the entire masks applied over this layer, these masks are visible as the black and white texture in the mid of the above image.
 - "**Fill Color Distance**" when this value is 0 it means that all pixels within the mask will be drawn as this color, but a non zero value it means that any pixel that is within this distance from any margin of the mask it will not draw.
 
-  
-![OutlineThickness](https://github.com/user-attachments/assets/f202c1db-7043-4034-9f0d-d2839cb08774)  
+   
 Once you click the "**Add Outline**", the Outlines parameters will be displayed on the panel, this feature is almost the same feature found in the Height Gradients layer but here it is more powerful as it can draw outlines from different incoming masks into this layer.
+![OutlineThickness](https://github.com/user-attachments/assets/f202c1db-7043-4034-9f0d-d2839cb08774)  
 - "**Outline Thickness**" is how thick the outlines are rendered in a range from 0 to 32 pixels wide, a value of 0 disables this feature
 - "**Outline Intersections**" is how these outlines are blended in case they are rendered one on top of the other
 - "**Outline Color**" the color of the outline
+
+In cleanup section there are two options intended to fix stranded pixels that act more as noise or debris and these can be removed by "**Cleanup Small Pixel Patches**" and "**Cleanup On Pixels**".  
+
+![InnerGlowExamples](https://github.com/user-attachments/assets/630d4af5-7439-4cf1-813a-34242034eadc)  
+Inner Glow section is activated if you click on the "**Add Inner Glow**". This feature as its name implies is a glow that is drawn  inside the masks on its margins.
+- "**Inner Glow Margin Color**" represents the color that touches the margins of the masks
+- "**Inner Glow Inner Color**" represents the color on the inside of the mask
+- "**Inner Glow Blend**" represents how the this glow blends against the **Out texture** (texture that is always visible on top of this layer properties with blue text)
+- "**Inner Glow Thickness**" is a value between 1 and 64 and represents how wide is this glow, to have a value of zero you must unclik the **Add Inner Glow**, values larger than 64 pixels are not available at this time
+
+![OuterGlowExamples](https://github.com/user-attachments/assets/64700ef4-4883-47cd-8613-caf49a2d87fb)
