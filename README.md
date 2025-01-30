@@ -4,7 +4,7 @@ With these textures you can then use them at runtime in your games to be drawn a
 is not covering any functionality in displaying them ingame.
 
 ### Requirements
-Target version: UE 5.5
+Target version: UE 5.5 and UE 5.4
 Target platform: Windows
 
 ## Installation
@@ -170,7 +170,7 @@ This type of layer is very simple in purpose, is to blend two texture outputs fr
 - "**Blend:**" is the type of blend, and these options are: Normal, Add, Subtract, Multiply, Darken, Screen, Overlay, HardLight and SoftLight; Note that these do the same things as layer types you find Photoshop
 - "**Opacity:**" how much of this blend happens in percentage, a value of 0 does nothing
 
-### Captured Texture Meta Data
+## Captured Texture Meta Data
 This is a very important topic. Each texture exported by this plugin has a requirement on another plugin to keep some metadata.  Therefore make sure you have this plugin also at runtime into your game so you can read these values.
 ![Datasmith](https://github.com/user-attachments/assets/5547e8c4-e357-4a52-8986-9f3895fc374c)  
 With this plugin activated you can parse each of these generated textures at runtime.  
